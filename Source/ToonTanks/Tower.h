@@ -13,5 +13,23 @@ UCLASS()
 class TOONTANKS_API ATower : public ABasePawn
 {
 	GENERATED_BODY()
-	
+
+public:
+	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float FireRange = 800.f;
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+private:
+	class ATank* Tank;
+
+	FTimerHandle FireRateTimerHandle;
+	float FireRate = 2.f;
+	void CheckFireCondition();
+
+	bool InFireRange();
 };
